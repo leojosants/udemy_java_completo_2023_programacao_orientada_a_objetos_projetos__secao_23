@@ -1,12 +1,15 @@
 /*-------------------- packages --------------------*/
 package com.educandoweb.course.entities;
 
-/*-------------------- libraries --------------------*/
+/*-------------------- dependencies --------------------*/
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 /*-------------------- class User --------------------*/
@@ -20,10 +23,14 @@ public class User implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	private String name;
 	private String email;
 	private String phone;
 	private String password;
+	
+	@OneToMany(mappedBy = "client")
+	private List<Order> orders = instanceateArrayList(); // association
 
 	/*-------------------- constructors --------------------*/
 	public User() {}
@@ -75,6 +82,10 @@ public class User implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	public List<Order> getOrders() {
+		return this.orders;
+	}
 
 	/*-------------------- methods --------------------*/
 	@Override
@@ -99,5 +110,9 @@ public class User implements Serializable {
 		else if (!this.getId().equals(other.getId())) return false;
 
 		return true;
+	}
+	
+	private List<Order> instanceateArrayList() {
+		return new ArrayList<>();
 	}
 }
