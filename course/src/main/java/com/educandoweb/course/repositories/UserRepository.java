@@ -1,7 +1,7 @@
 /*-------------------- packages --------------------*/
 package com.educandoweb.course.repositories;
 
-/*-------------------- libraries --------------------*/
+/*-------------------- dependencies --------------------*/
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /*-------------------- modules --------------------*/
