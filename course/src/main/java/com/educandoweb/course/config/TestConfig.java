@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Profile;
 import com.educandoweb.course.entities.Category;
 import com.educandoweb.course.entities.Order;
 import com.educandoweb.course.entities.OrderItem;
+import com.educandoweb.course.entities.Payment;
 import com.educandoweb.course.entities.Product;
 import com.educandoweb.course.entities.User;
 import com.educandoweb.course.entities.enums.OrderStatus;
@@ -82,8 +83,18 @@ public class TestConfig implements CommandLineRunner {
 		OrderItem order_item_4 = instanceateOrderItem(order_3, product_5, 2, product_5.getPrice()); 
 		
 		this.order_item_repository.saveAll(Arrays.asList(order_item_1, order_item_2, order_item_3, order_item_4));
+		
+		Payment payment_1 = instanceatePayment(Instant.parse("2019-06-20T21:53:07Z"), order_1);
+		
+		order_1.setPayment(payment_1);
+		
+		this.order_repository.save(order_1);
 	}
 
+	private Payment instanceatePayment(Instant moment, Order order) {
+		return new Payment(null, moment, order);
+	}
+	
 	private Product instanceateProduct(String name, String description, Double price, String img_url) {
 		return new Product(null, name, description, price, img_url);
 	}
