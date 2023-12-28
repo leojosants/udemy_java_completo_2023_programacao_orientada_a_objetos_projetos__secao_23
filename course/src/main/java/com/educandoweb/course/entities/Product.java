@@ -5,6 +5,7 @@ package com.educandoweb.course.entities;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,6 +13,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 /*-------------------- class Product --------------------*/
@@ -33,10 +35,14 @@ public class Product implements Serializable {
 	
 	@ManyToMany
 	@JoinTable(name = "tb_product_category", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
-	private Set<Category> categories = instanceateHashSet(); // association
+	private Set<Category> categories = instanceateSetCategoryHashSet(); // association
+	
+	@OneToMany(mappedBy = "id.product")
+	private Set<OrderItem> items = instanceateSetOrderItemHashSet(); // association
 	
 	/*-------------------- constructors --------------------*/
 	public Product() {}
+	
 	public Product(Long id, String name, String description, Double price, String img_url) {
 		this.setId(id);
 		this.setName(name);
@@ -90,8 +96,25 @@ public class Product implements Serializable {
 		return categories;
 	}
 	
+	@JsonIgnore
+	public Set<Order> getOrders() {
+		Set<Order> set = instanceateSetOrderHashSet();
+		for (OrderItem order : this.items) {
+			set.add(order.getOrder());
+		}
+		return set;
+	}
+	
 	/*-------------------- methods --------------------*/
-	private Set<Category> instanceateHashSet() {
+	private Set<Category> instanceateSetCategoryHashSet() {
+		return new HashSet<>();
+	}
+	
+	private Set<OrderItem> instanceateSetOrderItemHashSet() {
+		return new HashSet<>();
+	}
+	
+	private Set<Order> instanceateSetOrderHashSet() {
 		return new HashSet<>();
 	}
 	
