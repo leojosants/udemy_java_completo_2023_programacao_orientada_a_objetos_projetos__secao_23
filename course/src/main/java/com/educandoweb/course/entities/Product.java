@@ -53,7 +53,7 @@ public class Product implements Serializable {
 	
 	/*-------------------- getters and setters --------------------*/
 	public Long getId() {
-		return id;
+		return this.id;
 	}
 	
 	public void setId(Long id) {
@@ -61,7 +61,7 @@ public class Product implements Serializable {
 	}
 	
 	public String getName() {
-		return name;
+		return this.name;
 	}
 	
 	public void setName(String name) {
@@ -69,7 +69,7 @@ public class Product implements Serializable {
 	}
 	
 	public String getDescription() {
-		return description;
+		return this.description;
 	}
 	
 	public void setDescription(String description) {
@@ -77,7 +77,7 @@ public class Product implements Serializable {
 	}
 	
 	public Double getPrice() {
-		return price;
+		return this.price;
 	}
 	
 	public void setPrice(Double price) {
@@ -85,7 +85,7 @@ public class Product implements Serializable {
 	}
 	
 	public String getImgUrl() {
-		return img_url;
+		return this.img_url;
 	}
 
 	public void setImgUrl(String img_url) {
@@ -93,7 +93,7 @@ public class Product implements Serializable {
 	}
 
 	public Set<Category> getCategories() {
-		return categories;
+		return this.categories;
 	}
 	
 	@JsonIgnore

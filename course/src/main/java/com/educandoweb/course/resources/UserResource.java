@@ -18,7 +18,6 @@ import com.educandoweb.course.entities.User;
 import com.educandoweb.course.services.UserService;
 import org.springframework.web.bind.annotation.PutMapping;
 
-
 /*-------------------- class UserResource --------------------*/
 @RestController
 @RequestMapping(value = "/users")

@@ -1,7 +1,7 @@
 /*-------------------- packages --------------------*/
 package com.educandoweb.course;
 
-/*-------------------- libraries --------------------*/
+/*-------------------- imports --------------------*/
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

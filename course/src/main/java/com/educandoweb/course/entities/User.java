@@ -1,7 +1,7 @@
 /*-------------------- packages --------------------*/
 package com.educandoweb.course.entities;
 
-/*-------------------- dependencies --------------------*/
+/*-------------------- imports --------------------*/
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,12 +36,13 @@ public class User implements Serializable {
 
 	/*-------------------- constructors --------------------*/
 	public User() {}
+	
 	public User(Long id, String name, String email, String phone, String password) {
-		this.id = id;
-		this.name = name;
-		this.email = email;
-		this.phone = phone;
-		this.password = password;
+		this.setId(id);
+		this.setName(name);
+		this.setEmail(email);
+		this.setPhone(phone);
+		this.setPassword(password);
 	}
 
 	/*-------------------- getters and setters --------------------*/

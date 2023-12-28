@@ -33,14 +33,15 @@ public class Category implements Serializable {
 	
 	/*-------------------- constructors --------------------*/
 	public Category() {}
+	
 	public Category(Long id, String name) {
-		this.id = id;
-		this.name = name;
+		this.setId(id);
+		this.setName(name);
 	}
 	
 	/*-------------------- getters and setters --------------------*/
 	public Long getId() {
-		return id;
+		return this.id;
 	}
 	
 	public void setId(Long id) {
@@ -48,7 +49,7 @@ public class Category implements Serializable {
 	}
 	
 	public String getName() {
-		return name;
+		return this.name;
 	}
 	
 	public void setName(String name) {
@@ -56,7 +57,7 @@ public class Category implements Serializable {
 	}
 	
 	public Set<Product> getProducts() {
-		return products;
+		return this.products;
 	}
 	
 	/*-------------------- methods --------------------*/

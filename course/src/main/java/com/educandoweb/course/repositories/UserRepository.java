@@ -1,10 +1,8 @@
 /*-------------------- packages --------------------*/
 package com.educandoweb.course.repositories;
 
-/*-------------------- dependencies --------------------*/
+/*-------------------- imports --------------------*/
 import org.springframework.data.jpa.repository.JpaRepository;
-
-/*-------------------- modules --------------------*/
 import com.educandoweb.course.entities.User;
 
 /*-------------------- interface UserRepository --------------------*/

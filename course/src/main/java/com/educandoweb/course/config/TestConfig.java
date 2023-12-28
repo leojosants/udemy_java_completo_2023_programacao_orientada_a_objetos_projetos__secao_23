@@ -70,9 +70,9 @@ public class TestConfig implements CommandLineRunner {
 		User user_1 = instanceateUser("Maria Brown", "maria@gmail.com", "988888888", "123456");
 		User user_2 = instanceateUser("Alex Green", "alex@gmail.com", "977777777", "123456");
 
-		Order order_1 = instanceateOrder(Instant.parse("2019-06-20T19:53:07Z"), OrderStatus.PAID, user_1);
-		Order order_2 = instanceateOrder(Instant.parse("2019-07-21T03:42:10Z"), OrderStatus.WAINTING_PAYMENT, user_2);
-		Order order_3 = instanceateOrder(Instant.parse("2019-07-22T15:21:22Z"), OrderStatus.WAINTING_PAYMENT, user_1); 
+		Order order_1 = instanceateOrder(generateInstant("2019-06-20T19:53:07Z"), OrderStatus.PAID, user_1);
+		Order order_2 = instanceateOrder(generateInstant("2019-07-21T03:42:10Z"), OrderStatus.WAINTING_PAYMENT, user_2);
+		Order order_3 = instanceateOrder(generateInstant("2019-07-22T15:21:22Z"), OrderStatus.WAINTING_PAYMENT, user_1); 
 		
 		this.user_repository.saveAll(Arrays.asList(user_1, user_2));
 		this.order_repository.saveAll(Arrays.asList(order_1, order_2, order_3));
@@ -84,11 +84,15 @@ public class TestConfig implements CommandLineRunner {
 		
 		this.order_item_repository.saveAll(Arrays.asList(order_item_1, order_item_2, order_item_3, order_item_4));
 		
-		Payment payment_1 = instanceatePayment(Instant.parse("2019-06-20T21:53:07Z"), order_1);
+		Payment payment_1 = instanceatePayment(generateInstant("2019-06-20T21:53:07Z"), order_1);
 		
 		order_1.setPayment(payment_1);
 		
 		this.order_repository.save(order_1);
+	}
+
+	private Instant generateInstant(String moment) {
+		return Instant.parse(moment);
 	}
 
 	private Payment instanceatePayment(Instant moment, Order order) {

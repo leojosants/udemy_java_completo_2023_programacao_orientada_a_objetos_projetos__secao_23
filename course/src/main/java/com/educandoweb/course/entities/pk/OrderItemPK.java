@@ -26,7 +26,7 @@ public class OrderItemPK implements Serializable {
 
 	/*-------------------- getters and setters --------------------*/
 	public Order getOrder() {
-		return order;
+		return this.order;
 	}
 
 	public void setOrder(Order order) {
@@ -34,7 +34,7 @@ public class OrderItemPK implements Serializable {
 	}
 
 	public Product getProduct() {
-		return product;
+		return this.product;
 	}
 
 	public void setProduct(Product product) {

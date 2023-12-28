@@ -1,13 +1,11 @@
 /*-------------------- packages --------------------*/
 package com.educandoweb.course.repositories;
 
-/*-------------------- dependencies --------------------*/
+/*-------------------- imports --------------------*/
 import org.springframework.data.jpa.repository.JpaRepository;
-
-/*-------------------- modules --------------------*/
 import com.educandoweb.course.entities.Order;
 
-/*-------------------- interface UserRepository --------------------*/
+/*-------------------- interface OrderRepository --------------------*/
 public interface OrderRepository extends JpaRepository<Order, Long> {
 	//
 }

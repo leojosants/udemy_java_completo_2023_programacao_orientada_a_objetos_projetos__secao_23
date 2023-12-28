@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.educandoweb.course.entities.Product;
 import com.educandoweb.course.repositories.ProductRepository;
 
-/*-------------------- class UserService --------------------*/
+/*-------------------- class ProductService --------------------*/
 @Service
 public class ProductService {
 

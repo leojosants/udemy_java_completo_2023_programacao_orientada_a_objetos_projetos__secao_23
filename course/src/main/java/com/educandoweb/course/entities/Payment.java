@@ -36,9 +36,9 @@ public class Payment implements Serializable {
 	public Payment() {}
 	
 	public Payment(Long id, Instant moment, Order order) {
-		this.id = id;
-		this.moment = moment;
-		this.order = order;
+		this.setId(id);
+		this.setMoment(moment);
+		this.setOrder(order);
 	}
 	
 	/*-------------------- getters and setters --------------------*/
