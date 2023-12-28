@@ -48,11 +48,19 @@ public class TestConfig implements CommandLineRunner {
 		Product product_3 = instanceateProduct("Macbook Pro", "Nam eleifend maximus tortor, at mollis.", 1250.0, "");
 		Product product_4 = instanceateProduct("PC Gamer", "Donec aliquet odio ac rhoncus cursus.", 1200.0, "");
 		Product product_5 = instanceateProduct("Rails for Dummies", "Cras fringilla convallis sem vel faucibus.", 100.99, ""); 
-
 		
 		this.category_repository.saveAll(Arrays.asList(category_1, category_2, category_3));
 		this.product_repository.saveAll(Arrays.asList(product_1, product_2, product_3, product_4, product_5));
 
+		product_1.getCategories().add(category_2);
+		product_2.getCategories().add(category_1);
+		product_2.getCategories().add(category_3);
+		product_3.getCategories().add(category_3);
+		product_4.getCategories().add(category_3);
+		product_5.getCategories().add(category_2);
+		
+		this.product_repository.saveAll(Arrays.asList(product_1, product_2, product_3, product_4, product_5));
+		
 		User user_1 = instanceateUser("Maria Brown", "maria@gmail.com", "988888888", "123456");
 		User user_2 = instanceateUser("Alex Green", "alex@gmail.com", "977777777", "123456");
 
