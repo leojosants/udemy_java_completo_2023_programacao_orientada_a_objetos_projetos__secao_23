@@ -8,7 +8,6 @@ import java.util.HashSet;
 import java.util.Set;
 import com.educandoweb.course.entities.enums.OrderStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -105,6 +104,14 @@ public class Order implements Serializable {
 	}
 
 	/*-------------------- methods --------------------*/
+	public Double getTotal() {
+		double sum = 0.0;
+		for (OrderItem order_item : items) {
+			sum += order_item.getSubTotal();
+		}
+		return sum;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
