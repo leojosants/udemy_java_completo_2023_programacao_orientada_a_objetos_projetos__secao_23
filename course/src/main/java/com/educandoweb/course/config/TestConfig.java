@@ -1,18 +1,18 @@
 /*-------------------- packages --------------------*/
 package com.educandoweb.course.config;
 
-/*-------------------- dependencies --------------------*/
+/*-------------------- imports --------------------*/
 import java.time.Instant;
 import java.util.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
-
-/*-------------------- modules --------------------*/
+import com.educandoweb.course.entities.Category;
 import com.educandoweb.course.entities.Order;
 import com.educandoweb.course.entities.User;
 import com.educandoweb.course.entities.enums.OrderStatus;
+import com.educandoweb.course.repositories.CategoryRepository;
 import com.educandoweb.course.repositories.OrderRepository;
 import com.educandoweb.course.repositories.UserRepository;
 
@@ -27,10 +27,19 @@ public class TestConfig implements CommandLineRunner {
 
 	@Autowired
 	private OrderRepository order_repository;
+	
+	@Autowired
+	private CategoryRepository category_repository;
 
 	/*-------------------- methods --------------------*/
 	@Override
 	public void run(String... args) throws Exception {
+		Category category_1 = instanceateCategory("Electronics");
+		Category category_2 = instanceateCategory("Books");
+		Category category_3 = instanceateCategory("Computers"); 
+		
+		this.category_repository.saveAll(Arrays.asList(category_1, category_2, category_3));
+
 		User user_1 = instanceateUser("Maria Brown", "maria@gmail.com", "988888888", "123456");
 		User user_2 = instanceateUser("Alex Green", "alex@gmail.com", "977777777", "123456");
 
@@ -40,6 +49,10 @@ public class TestConfig implements CommandLineRunner {
 		
 		this.user_repository.saveAll(Arrays.asList(user_1, user_2));
 		this.order_repository.saveAll(Arrays.asList(order_1, order_2, order_3));
+	}
+
+	private Category instanceateCategory(String name) {
+		return new Category(null, name);
 	}
 
 	private Order instanceateOrder(Instant moment, OrderStatus order_status, User user) {
