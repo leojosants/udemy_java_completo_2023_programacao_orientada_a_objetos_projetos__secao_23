@@ -12,10 +12,10 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 
-/*-------------------- class Category --------------------*/
+/*-------------------- class Product --------------------*/
 @Entity
-@Table(name = "tb_Category")
-public class Category implements Serializable {
+@Table(name = "tb_Product")
+public class Product implements Serializable {
 
 	/*-------------------- attributes --------------------*/
 	private static final long serialVersionUID = 1L;
@@ -23,18 +23,24 @@ public class Category implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	private String name;
+	private String description;
+	private Double price;
+	private String img_url;
 	
 	@Transient
-	private Set<Product> products = instanceateHashSet(); // association
+	private Set<Category> categories = instanceateHashSet(); // association
 	
 	/*-------------------- constructors --------------------*/
-	public Category() {}
-	public Category(Long id, String name) {
+	public Product() {}
+	public Product(Long id, String name, String description, Double price, String img_url) {
 		this.id = id;
 		this.name = name;
-	}
+		this.description = description;
+		this.price = price;
+		this.img_url = img_url;
+	} 
 	
 	/*-------------------- getters and setters --------------------*/
 	public Long getId() {
@@ -53,11 +59,39 @@ public class Category implements Serializable {
 		this.name = name;
 	}
 	
-	public Set<Product> getProducts() {
-		return products;
+	public String getDescription() {
+		return description;
+	}
+	
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
+	public Double getPrice() {
+		return price;
+	}
+	
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+	
+	public String getImgUrl() {
+		return img_url;
+	}
+
+	public void setImgUrl(String img_url) {
+		this.img_url = img_url;
+	}
+
+	public Set<Category> getCategories() {
+		return categories;
 	}
 	
 	/*-------------------- methods --------------------*/
+	private Set<Category> instanceateHashSet() {
+		return new HashSet<>();
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -72,17 +106,13 @@ public class Category implements Serializable {
 		if (obj == null) return false;
 		if (getClass() != obj.getClass()) return false;
 
-		Category other = (Category) obj;
+		Product other = (Product) obj;
 		
 		if (this.getId() == null) {
 			if (other.getId() != null) return false;
 		} 
 		else if (!this.getId().equals(other.getId())) return false;
-		
+
 		return true;
-	}
-	
-	private Set<Product> instanceateHashSet() {
-		return new HashSet<>();
 	}
 }

@@ -10,10 +10,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import com.educandoweb.course.entities.Category;
 import com.educandoweb.course.entities.Order;
+import com.educandoweb.course.entities.Product;
 import com.educandoweb.course.entities.User;
 import com.educandoweb.course.entities.enums.OrderStatus;
 import com.educandoweb.course.repositories.CategoryRepository;
 import com.educandoweb.course.repositories.OrderRepository;
+import com.educandoweb.course.repositories.ProductRepository;
 import com.educandoweb.course.repositories.UserRepository;
 
 /*-------------------- class TestConfig --------------------*/
@@ -30,6 +32,9 @@ public class TestConfig implements CommandLineRunner {
 	
 	@Autowired
 	private CategoryRepository category_repository;
+	
+	@Autowired
+	private ProductRepository product_repository;
 
 	/*-------------------- methods --------------------*/
 	@Override
@@ -38,7 +43,15 @@ public class TestConfig implements CommandLineRunner {
 		Category category_2 = instanceateCategory("Books");
 		Category category_3 = instanceateCategory("Computers"); 
 		
+		Product product_1 = instanceateProduct("The Lord of the Rings", "Lorem ipsum dolor sit amet, consectetur.", 90.5, "");
+		Product product_2 = instanceateProduct("Smart TV", "Nulla eu imperdiet purus. Maecenas ante.", 2190.0, "");
+		Product product_3 = instanceateProduct("Macbook Pro", "Nam eleifend maximus tortor, at mollis.", 1250.0, "");
+		Product product_4 = instanceateProduct("PC Gamer", "Donec aliquet odio ac rhoncus cursus.", 1200.0, "");
+		Product product_5 = instanceateProduct("Rails for Dummies", "Cras fringilla convallis sem vel faucibus.", 100.99, ""); 
+
+		
 		this.category_repository.saveAll(Arrays.asList(category_1, category_2, category_3));
+		this.product_repository.saveAll(Arrays.asList(product_1, product_2, product_3, product_4, product_5));
 
 		User user_1 = instanceateUser("Maria Brown", "maria@gmail.com", "988888888", "123456");
 		User user_2 = instanceateUser("Alex Green", "alex@gmail.com", "977777777", "123456");
@@ -49,6 +62,10 @@ public class TestConfig implements CommandLineRunner {
 		
 		this.user_repository.saveAll(Arrays.asList(user_1, user_2));
 		this.order_repository.saveAll(Arrays.asList(order_1, order_2, order_3));
+	}
+
+	private Product instanceateProduct(String name, String description, Double price, String img_url) {
+		return new Product(null, name, description, price, img_url);
 	}
 
 	private Category instanceateCategory(String name) {
