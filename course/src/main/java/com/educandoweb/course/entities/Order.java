@@ -1,9 +1,11 @@
 /*-------------------- packages --------------------*/
 package com.educandoweb.course.entities;
 
-/*-------------------- dependencies --------------------*/
+/*-------------------- imports --------------------*/
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 import com.educandoweb.course.entities.enums.OrderStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Entity;
@@ -12,6 +14,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 /*-------------------- class Order --------------------*/
@@ -34,6 +37,9 @@ public class Order implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "client_id")
 	private User client; // association
+	
+	@OneToMany(mappedBy = "id.order")
+	private Set<OrderItem> items = instanceateHashSet(); // association
 	
 	/*-------------------- constructors --------------------*/
 	public Order() {}
@@ -78,6 +84,10 @@ public class Order implements Serializable {
 	public void setClient(User client) {
 		this.client = client;
 	}
+	
+	public Set<OrderItem> getItems() {
+		return this.items;
+	}
 
 	/*-------------------- methods --------------------*/
 	@Override
@@ -102,5 +112,9 @@ public class Order implements Serializable {
 		else if (!this.getId().equals(other.getId())) return false;
 
 		return true;
+	}
+	
+	private Set<OrderItem> instanceateHashSet() {
+		return new HashSet<>();
 	}
 }

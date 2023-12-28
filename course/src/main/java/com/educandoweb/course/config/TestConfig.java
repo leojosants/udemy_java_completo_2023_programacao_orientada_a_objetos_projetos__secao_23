@@ -10,10 +10,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import com.educandoweb.course.entities.Category;
 import com.educandoweb.course.entities.Order;
+import com.educandoweb.course.entities.OrderItem;
 import com.educandoweb.course.entities.Product;
 import com.educandoweb.course.entities.User;
 import com.educandoweb.course.entities.enums.OrderStatus;
 import com.educandoweb.course.repositories.CategoryRepository;
+import com.educandoweb.course.repositories.OrderItemRepository;
 import com.educandoweb.course.repositories.OrderRepository;
 import com.educandoweb.course.repositories.ProductRepository;
 import com.educandoweb.course.repositories.UserRepository;
@@ -35,6 +37,9 @@ public class TestConfig implements CommandLineRunner {
 	
 	@Autowired
 	private ProductRepository product_repository;
+	
+	@Autowired
+	private OrderItemRepository order_item_repository;
 
 	/*-------------------- methods --------------------*/
 	@Override
@@ -70,6 +75,13 @@ public class TestConfig implements CommandLineRunner {
 		
 		this.user_repository.saveAll(Arrays.asList(user_1, user_2));
 		this.order_repository.saveAll(Arrays.asList(order_1, order_2, order_3));
+		
+		OrderItem order_item_1 = instanceateOrderItem(order_1, product_1, 2, product_1.getPrice());
+		OrderItem order_item_2 = instanceateOrderItem(order_1, product_3, 1, product_4.getPrice());
+		OrderItem order_item_3 = instanceateOrderItem(order_2, product_3, 2, product_1.getPrice());
+		OrderItem order_item_4 = instanceateOrderItem(order_3, product_5, 2, product_5.getPrice()); 
+		
+		this.order_item_repository.saveAll(Arrays.asList(order_item_1, order_item_2, order_item_3, order_item_4));
 	}
 
 	private Product instanceateProduct(String name, String description, Double price, String img_url) {
@@ -86,6 +98,10 @@ public class TestConfig implements CommandLineRunner {
 
 	private User instanceateUser(String name, String email, String phone, String password) {
 		return new User(null, name, email, phone, password);
+	}
+	
+	private OrderItem instanceateOrderItem(Order order, Product product, Integer quantity, Double price) {
+		return new OrderItem(order, product, quantity, price);
 	}
 }
 
